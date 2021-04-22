@@ -18,26 +18,54 @@ struct AppState: Equatable {
     var todos: [Todo]
 }
 
+enum TodoAction {
+    case checkBoxTapped
+    case textFieldChanged(String)
+}
+
+struct TodoEnvironment {
+    
+}
+
+let todoReducer = Reducer<Todo, TodoAction, TodoEnvironment> { state, action, env in
+    switch action {
+    case .checkBoxTapped:
+        state.isComplete.toggle()
+        return .none
+        
+    case .textFieldChanged(let text):
+        state.description = text
+        return .none
+    }
+}
+
 enum AppAction {
-    case todoCheckBoxTapped(index: Int)
-    case todoTextFieldChanged(index: Int, text: String)
+    case todo(index: Int, action: TodoAction)
+    case addButtonTapped
 }
 
 struct AppEnvironment {
     
 }
 
-let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, env in
-    switch action {
-    case .todoCheckBoxTapped(index: let index):
-        state.todos[index].isComplete.toggle()
-        return .none
-        
-    case .todoTextFieldChanged(index: let index, text: let text):
-        state.todos[index].description = text
-        return .none
-    }
-}.debug()
+let appReducer: Reducer<AppState, AppAction, AppEnvironment> =
+    Reducer.combine(
+        todoReducer.forEach(
+            state: \AppState.todos,
+            action: /AppAction.todo(index:action:),
+            environment: { (_) in TodoEnvironment() }
+        ),
+        Reducer { state, action, environment in
+            switch action {
+            case .todo(index: let index, action: let action):
+                return .none
+            case .addButtonTapped:
+                state.todos.insert(Todo(id: UUID()), at: 0)
+                return .none
+            }
+        }
+    ).debug()
+
 
 struct ContentView: View {
     let store: Store<AppState, AppAction>
@@ -46,24 +74,39 @@ struct ContentView: View {
         NavigationView {
             WithViewStore (self.store) { viewStore in
                 List {
-                    ForEach(Array(viewStore.todos.enumerated()), id: \.element.id){ idx, todo in
-                        HStack {
-                            Button(action: {
-                                viewStore.send(.todoCheckBoxTapped(index: idx))
-                            }, label: {
-                                Image(systemName: "checkmark.square")
-                            }).buttonStyle(PlainButtonStyle())
-                            TextField(
-                                "Untitled Todo",
-                                text: viewStore.binding(
-                                    get: { $0.todos[idx].description },
-                                    send: { .todoTextFieldChanged(index: idx, text: $0) }
-                                )
-                            )
-                        }.foregroundColor(todo.isComplete ? .gray : nil)
-                    }
-                }
-            }.navigationBarTitle("Todos")
+                    ForEachStore(self.store.scope(
+                        state: \.todos,
+                        action: AppAction.todo(index:action:)),
+                        content: TodoView.init(todoStore:)
+                    )
+                }.navigationBarTitle("Todos")
+                .navigationBarItems(trailing: Button("Add", action: {
+                    viewStore.send(.addButtonTapped)
+                }))
+            }
+        }
+    }
+}
+
+struct TodoView: View {
+    internal let todoStore: Store<Todo, TodoAction>
+    
+    var body: some View {
+        WithViewStore (todoStore) { viewStore in
+            HStack {
+                Button(action: { viewStore.send(.checkBoxTapped) }) {
+                    Image(systemName:  viewStore.isComplete ? "checkmark.square" : "square")
+                }.buttonStyle(PlainButtonStyle())
+                
+                TextField(
+                    "Untitled Todo",
+                    text: viewStore.binding(
+                        get: \.description,
+                        send: TodoAction.textFieldChanged
+                    )
+                )
+            }
+            .foregroundColor(viewStore.isComplete ? .gray : nil)
         }
     }
 }
