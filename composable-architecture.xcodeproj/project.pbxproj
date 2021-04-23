@@ -13,7 +13,11 @@
 		025FD5EB263004C200546807 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 025FD5EA263004C200546807 /* Preview Assets.xcassets */; };
 		025FD5F6263004C200546807 /* composable_architectureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025FD5F5263004C200546807 /* composable_architectureTests.swift */; };
 		025FD601263004C200546807 /* composable_architectureUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025FD600263004C200546807 /* composable_architectureUITests.swift */; };
-		025FD6132630054B00546807 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 025FD6122630054B00546807 /* ComposableArchitecture */; };
+		02A2FBB92632B70D008DB51F /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2FBB82632B70D008DB51F /* TodoView.swift */; };
+		02A2FBBE2632B75F008DB51F /* TodoView+Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2FBBD2632B75F008DB51F /* TodoView+Reducer.swift */; };
+		02A2FBC32632B794008DB51F /* ContentView+Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2FBC22632B794008DB51F /* ContentView+Reducer.swift */; };
+		02E3EB3426318DCA00E9FF6E /* TodosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E3EB3326318DCA00E9FF6E /* TodosTests.swift */; };
+		02E3EB3D26318F0F00E9FF6E /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 02E3EB3C26318F0F00E9FF6E /* ComposableArchitecture */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +50,10 @@
 		025FD5FC263004C200546807 /* composable-architectureUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "composable-architectureUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		025FD600263004C200546807 /* composable_architectureUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = composable_architectureUITests.swift; sourceTree = "<group>"; };
 		025FD602263004C200546807 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		02A2FBB82632B70D008DB51F /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
+		02A2FBBD2632B75F008DB51F /* TodoView+Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoView+Reducer.swift"; sourceTree = "<group>"; };
+		02A2FBC22632B794008DB51F /* ContentView+Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView+Reducer.swift"; sourceTree = "<group>"; };
+		02E3EB3326318DCA00E9FF6E /* TodosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				025FD6132630054B00546807 /* ComposableArchitecture in Frameworks */,
+				02E3EB3D26318F0F00E9FF6E /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +110,9 @@
 				025FD5E7263004C200546807 /* Assets.xcassets */,
 				025FD5EC263004C200546807 /* Info.plist */,
 				025FD5E9263004C200546807 /* Preview Content */,
+				02A2FBB82632B70D008DB51F /* TodoView.swift */,
+				02A2FBBD2632B75F008DB51F /* TodoView+Reducer.swift */,
+				02A2FBC22632B794008DB51F /* ContentView+Reducer.swift */,
 			);
 			path = "composable-architecture";
 			sourceTree = "<group>";
@@ -119,6 +130,7 @@
 			children = (
 				025FD5F5263004C200546807 /* composable_architectureTests.swift */,
 				025FD5F7263004C200546807 /* Info.plist */,
+				02E3EB3326318DCA00E9FF6E /* TodosTests.swift */,
 			);
 			path = "composable-architectureTests";
 			sourceTree = "<group>";
@@ -149,7 +161,7 @@
 			);
 			name = "composable-architecture";
 			packageProductDependencies = (
-				025FD6122630054B00546807 /* ComposableArchitecture */,
+				02E3EB3C26318F0F00E9FF6E /* ComposableArchitecture */,
 			);
 			productName = "composable-architecture";
 			productReference = 025FD5E0263004C000546807 /* composable-architecture.app */;
@@ -223,7 +235,7 @@
 			);
 			mainGroup = 025FD5D7263004C000546807;
 			packageReferences = (
-				025FD6112630054B00546807 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				02E3EB3B26318F0F00E9FF6E /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 			);
 			productRefGroup = 025FD5E1263004C000546807 /* Products */;
 			projectDirPath = "";
@@ -267,8 +279,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02A2FBC32632B794008DB51F /* ContentView+Reducer.swift in Sources */,
+				02A2FBB92632B70D008DB51F /* TodoView.swift in Sources */,
 				025FD5E6263004C000546807 /* ContentView.swift in Sources */,
 				025FD5E4263004C000546807 /* composable_architectureApp.swift in Sources */,
+				02A2FBBE2632B75F008DB51F /* TodoView+Reducer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				025FD5F6263004C200546807 /* composable_architectureTests.swift in Sources */,
+				02E3EB3426318DCA00E9FF6E /* TodosTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -590,20 +606,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		025FD6112630054B00546807 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+		02E3EB3B26318F0F00E9FF6E /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.18.0;
+				minimumVersion = 0.1.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		025FD6122630054B00546807 /* ComposableArchitecture */ = {
+		02E3EB3C26318F0F00E9FF6E /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 025FD6112630054B00546807 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			package = 02E3EB3B26318F0F00E9FF6E /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
 		};
 /* End XCSwiftPackageProductDependency section */

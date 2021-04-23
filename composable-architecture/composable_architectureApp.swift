@@ -20,7 +20,10 @@ struct composable_architectureApp: App {
                         Todo(id: UUID(), description: "Cook Dinner", isComplete: false)
                     ]),
                     reducer: appReducer,
-                    environment: AppEnvironment()
+                    environment: AppEnvironment(
+                        uuid: UUID.init,
+                        mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+                    )
                 )
             )
         }
